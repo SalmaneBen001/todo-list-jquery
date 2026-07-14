@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="fr">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Todo jQuery propre</title>
+    <script src="jquery.min.js"></script>
+
+    <style>
+        body {
+            font-family: Arial;
+            margin: 30px;
+        }
+
+        #taskInput {
+            width: 250px;
+            padding: 8px;
+        }
+
+        button {
+            padding: 8px 12px;
+            cursor: pointer;
+        }
+
+        ul {
+            margin-top: 20px;
+            padding: 0;
+        }
+
+        li {
+            list-style: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            background: #f2f2f2;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            width: 400px;
+        }
+
+        .done {
+            text-decoration: line-through;
+            color: gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h2>Gestionnaire de tâches</h2>
+
+    <input type="text" id="taskInput" placeholder="Nouvelle tâche...">
+    <button id="addBtn">Ajouter</button>
+
+    <ul id="taskList"></ul>
+
+    <script>
+        $(function () {   //equals to $(document).ready
+
+            // Ajouter une tâche
+            function addTask() {
+                const text = $("#taskInput").val().trim();
+                if (!text) return;
+
+                const task = `
+                    <li>
+                        <span class="task-text">${text}</span>
+                        <div class="actions">
+                        <button class="doneBtn">✔️</button>
+                        <button class="deleteBtn">✖️</button>
+                        </div>
+                    </li>
+                `;
+
+                $("#taskList").append(task);
+                $("#taskInput").val("").focus();
+            }
+
+            // Click bouton ajouter
+            $("#addBtn").on("click", addTask);
+
+            // Entrée clavier
+            $("#taskInput").on("keypress", function (e) {
+                if (e.which === 13) addTask();   //e.which = e.keyCode or you can use e.key = "Enter"
+            });
+
+            // ✔️ Terminer tâche (event delegation propre)
+            $("#taskList").on("click", ".doneBtn", function () {
+                $(this).closest("li").find(".task-text").toggleClass("done");
+            });
+
+            // ✖️ Supprimer tâche
+            $("#taskList").on("click", ".deleteBtn", function () {
+                $(this).closest("li").remove();
+            });
+
+        });
+    </script>
+
+</body>
+
+</html>
