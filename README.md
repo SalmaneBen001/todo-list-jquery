@@ -11,3 +11,10 @@ An interactive, user-friendly web application designed to help users track and m
 - **Frontend Framework/Library:** jQuery (JavaScript Ecosystem)
 - **Structure & Styling:** HTML5 / CSS3
 - **Core Concepts:** Event handling (`.on()`), dynamic DOM insertion (`.append()`), element removal (`.remove()`), and input value handling.
+
+---
+
+## 📸 Interface Preview
+Visual preview of the dynamic task management application and state toggles:
+
+![To-Do List Interface](screenshot.png)
